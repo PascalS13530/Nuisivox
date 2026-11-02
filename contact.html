@@ -13,7 +13,9 @@
 <p class="updated">Mis à jour le <time datetime="2026-10-24">24 octobre 2026</time> · par <a href="techniciens.html" rel="author">Mathias Sergent</a>, technicien certifié</p><ul class="trust"><li>Technicien certifié Certibiocide</li><li>Particuliers et professionnels</li><li>Tout le département 13</li></ul></div>
 </div></section>
 <section class="block"><div class="wrap split">
-  <form id="demande">
+  <form id="demande" action="contact.php" method="post">
+    <div class="hp" aria-hidden="true"><label for="f-site">Ne pas remplir<input id="f-site" name="site_web" tabindex="-1" autocomplete="off"></label></div>
+    <input type="hidden" name="t" id="f-t">
     <label for="f-nom">Nom<input id="f-nom" name="nom" autocomplete="name" required></label>
     <label for="f-tel">Téléphone<input id="f-tel" name="tel" type="tel" autocomplete="tel" required></label>
     <label for="f-commune">Commune<input id="f-commune" name="commune" placeholder="ex. Aubagne, Marseille 13005" required></label>
@@ -22,13 +24,30 @@
       <option>Moustique tigre</option><option>Chenilles processionnaires</option><option>Autre ou je ne sais pas</option></select></label>
     <label for="f-msg">Ce que vous constatez<textarea id="f-msg" name="message" rows="5"></textarea></label>
     <button class="btn btn-primary" type="submit">Envoyer la demande</button>
-    <p class="form-note">Version provisoire&nbsp;: le formulaire n'est pas encore relié à une boîte mail.</p>
-    <p class="form-status" id="f-status" hidden>Formulaire de démonstration&nbsp;: aucune demande n'a été envoyée.</p>
+    <p class="form-note">Vos coordonnées servent uniquement à vous rappeler pour cette demande.</p>
+    <p class="form-status" id="f-status" role="status" aria-live="polite" hidden></p>
   </form>
   <div class="prose"><div class="section-head"><span class="eyebrow">Par téléphone</span><h2>Appelez-nous</h2></div><p class="phone">06 60 68 78 19</p><p>Du lundi au samedi, 8 h – 19 h</p>
   <p>Zone d'intervention&nbsp;: Marseille, Pays d'Aix, Pays d'Aubagne et Bouches-du-Rhône.</p></div>
 </div></section>
-<script>document.getElementById("demande").addEventListener("submit",function(e){e.preventDefault();document.getElementById("f-status").hidden=false;});</script><section class="block linkhub-wrap"><div class="wrap"><div class="section-head"><span class="eyebrow">En savoir plus</span><h2>Avant de nous écrire</h2></div><ul class="linkhub"><li><a href="deratisation.html">Dératisation</a></li><li><a href="desinsectisation.html">Désinsectisation</a></li><li><a href="carnet.html">Des cas réels dans le 13</a></li></ul></div></section></main><section class="cta"><div class="wrap"><div class="box">
+<script>
+(function(){
+  var f=document.getElementById("demande"),st=document.getElementById("f-status"),b=f.querySelector("button[type=submit]");
+  document.getElementById("f-t").value=Date.now();
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    b.disabled=true;b.textContent="Envoi en cours…";
+    fetch(f.action,{method:"POST",body:new FormData(f)})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        st.textContent=d.message;st.hidden=false;
+        if(d.ok){f.reset();b.textContent="Demande envoyée";if(window.gtag)gtag("event","generate_lead",{form:"contact"});}
+        else{b.disabled=false;b.textContent="Envoyer la demande";}
+      })
+      .catch(function(){st.textContent="L'envoi a échoué. Merci de nous appeler au 06 60 68 78 19.";st.hidden=false;b.disabled=false;b.textContent="Envoyer la demande";});
+  });
+})();
+</script><section class="block linkhub-wrap"><div class="wrap"><div class="section-head"><span class="eyebrow">En savoir plus</span><h2>Avant de nous écrire</h2></div><ul class="linkhub"><li><a href="deratisation.html">Dératisation</a></li><li><a href="desinsectisation.html">Désinsectisation</a></li><li><a href="carnet.html">Des cas réels dans le 13</a></li></ul></div></section></main><section class="cta"><div class="wrap"><div class="box">
   <div><h2>Un nuisible chez vous&nbsp;?</h2><p>Décrivez ce que vous voyez, on vous rappelle pour fixer un diagnostic.</p></div>
   <div class="hero-actions"><span class="phone">06 60 68 78 19</span><a class="btn btn-dark" href="contact.html">Demander une intervention</a></div>
 </div></div></section>

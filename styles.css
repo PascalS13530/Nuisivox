@@ -302,3 +302,4 @@ table.data tbody th { color: var(--ink); font-weight: 700; }
 .consent-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
 .consent .btn { padding: 10px 20px; font-size: .95rem; }
 @media (max-width: 900px) { .consent { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); } .consent-actions .btn { flex: 1; } }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
