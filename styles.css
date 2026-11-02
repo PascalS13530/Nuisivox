@@ -294,3 +294,11 @@ table.data tbody th { color: var(--ink); font-weight: 700; }
   .section-head { margin-bottom: 24px; }
   .more-link { margin-top: 24px; }
 }
+
+/* Bandeau de consentement cookies (consent.js) */
+.consent { position: fixed; z-index: 40; left: 16px; right: 16px; bottom: 16px; max-width: 34rem; margin-left: auto; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 18px 20px; font-family: var(--font-body); }
+.consent p { margin: 0 0 14px; font-size: .97rem; line-height: 1.5; }
+.consent a { color: var(--sea); }
+.consent-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+.consent .btn { padding: 10px 20px; font-size: .95rem; }
+@media (max-width: 900px) { .consent { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); } .consent-actions .btn { flex: 1; } }
