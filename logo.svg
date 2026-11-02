@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 140" role="img" aria-label="NuisiVox">
+  <g transform="translate(70 70)">
+    <circle r="62" fill="#0a3d62"/>
+    <circle r="50" fill="none" stroke="#2faee0" stroke-width="5"/>
+    <circle r="36" fill="none" stroke="#2faee0" stroke-width="2" stroke-dasharray="4 6" opacity=".7"/>
+    <g stroke="#2faee0" stroke-width="6" stroke-linecap="round">
+      <line x1="0" y1="-62" x2="0" y2="-40"/><line x1="0" y1="40" x2="0" y2="62"/>
+      <line x1="-62" y1="0" x2="-40" y2="0"/><line x1="40" y1="0" x2="62" y2="0"/>
+    </g>
+    <text x="0" y="17" text-anchor="middle" font-family="'Bricolage Grotesque','Arial Black',sans-serif" font-weight="800" font-size="50" fill="#FFFFFF">N</text>
+  </g>
+  <text x="150" y="88" font-family="'Bricolage Grotesque','Arial Black',sans-serif" font-weight="800" font-size="64" fill="#0a3d62" letter-spacing="-2">Nuisi<tspan fill="#2faee0">Vox</tspan></text>
+  <rect x="152" y="106" width="40" height="5" rx="2.5" fill="#2faee0"/>
+  <text x="202" y="113" font-family="'Source Sans 3',Arial,sans-serif" font-weight="600" font-size="14" fill="#56676c" letter-spacing="1.6">DÉRATISATION · DÉSINSECTISATION · 13</text>
+</svg>

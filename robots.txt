@@ -1,0 +1,4 @@
+# Version provisoire : à remplacer par "Allow: /" à la mise en ligne
+User-agent: *
+Disallow: /
+Sitemap: https://nuisivox.fr/sitemap.xml
