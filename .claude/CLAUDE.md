@@ -38,6 +38,8 @@ Répondre en **français**, simplement.
 - **En attendant les chantiers réels** : des **exemples d'intervention** illustrés par des **photos libres
   de droit** (licence vérifiée, source et auteur notés), avec le badge visible « Exemple d'intervention ».
   **Chaque exemple est unique** : jamais le même exemple ni la même photo sur deux pages.
+  Seule exception : le carnet de tournée (`carnet.html`), qui rassemble tous les exemples. Les pages sans exemple propre
+  (accueil, guides, technicien) renvoient vers le carnet. Pages villes et pages nuisibles visées : 1 200 à 1 500 mots.
 - **Après chaque chantier**, le propriétaire envoie quelques photos et du contexte : intégrer
   l'intervention réelle sur la ou les pages concernées, **optimisée SEO et GEO** (lieu, nuisible, méthode,
   chiffres, résultat, texte alternatif descriptif), en remplacement d'un exemple. Ne jamais inventer un fait
