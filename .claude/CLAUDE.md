@@ -64,3 +64,5 @@ S'inspirer de la grille 2026 fournie par le propriétaire (tarifs indicatifs, HT
 - Autres nuisibles et contrats annuels de prévention : sur devis.
 - Devis gratuit ; pas de frais de déplacement dans le 13 et le 83 ; majoration jusqu'à 50 % week-ends, fériés et nuits (19 h - 7 h).
 Toujours préciser « à titre indicatif » et « HT ». Punaises de lit : non traitées sur NuisiVox.
+- 2026-11-03 : Cafards Marseille 93/100, Aix 94/100, Aubagne 93/100 ; GEO 10/10 ; intention détectée « transactionnelle »
+  (tarifs indicatifs dans les FAQ). Maximum atteignable selon RankFlow : 93-94 (sameAs manquant, voir plus haut).
