@@ -9,6 +9,8 @@ Répondre en **français**, simplement.
   modification demandée soit mise en ligne (commit en français, puis push sur `main`).
 - Avant de pousser : relire le HTML modifié, vérifier les liens internes, mettre à jour `sitemap.xml`
   si une page est créée ou supprimée.
+- Après toute modification de `styles.css`, changer le paramètre de version dans toutes les pages
+  (`styles.css?v=AAAAMMJJx`) : le navigateur garde la feuille de style en cache une semaine.
 - Ce dossier `.claude/` et les fichiers `.md` ne doivent pas être servis (règle dans `.htaccess`).
 
 ## Positionnement (décisions du propriétaire)
