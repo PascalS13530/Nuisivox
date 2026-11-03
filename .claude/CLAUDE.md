@@ -26,7 +26,7 @@ Répondre en **français**, simplement.
 - Pages villes (`marseille.html`, `aix-en-provence.html`, `aubagne.html`) = pages d'accueil par ville,
   qui renvoient vers leurs pages « prestation + ville ». Pages services (`deratisation.html`…) = guides
   régionaux (méthodes, protocoles, limites) : leur title ne vise plus une ville précise.
-- Vagues : 1) Dératisation Marseille, Aix, Aubagne + Cafards Marseille, Aix ; 2) avant le printemps :
+- Vagues : 1) Dératisation Marseille, Aix, Aubagne + Cafards Marseille, Aix, Aubagne ; 2) avant le printemps :
   Guêpes et frelons Aubagne, Aix + Fourmis Marseille ; 3) étendre seulement ce qui progresse dans la
   Search Console.
 
