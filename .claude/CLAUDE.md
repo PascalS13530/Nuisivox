@@ -17,6 +17,10 @@ Répondre en **français**, simplement.
 - **Villes principales : Marseille, Aix-en-Provence, Aubagne** (décision du 2026-11-03).
   **Trets n'est plus une ville principale** : page conservée, au même rang que Gardanne et Gémenos
   (pas dans le menu principal ni dans les titres). Villes voisines citées naturellement dans les pages.
+- Communes voisines par bassin de vie (2026-11-03) : **Trets est citée sur toutes les pages d'Aix**
+  (page ville et pages « prestation + Aix »), avec Rousset, Peynier, Fuveau, Châteauneuf-le-Rouge, Meyreuil ;
+  Auriol, La Bouilladisse, La Destrousse, Belcodène, Roquevaire sur les pages d'Aubagne ;
+  Pourrières, Puyloubier, Saint-Maximin sur la page Trets ; Gréasque sur Gardanne. Toujours dans des phrases utiles, jamais en liste.
 
 ## Pages locales « prestation + ville » (stratégie validée le 2026-11-03)
 - Une page = une intention : une prestation dans une ville (ex. « Dératisation à Marseille »).
