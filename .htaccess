@@ -6,3 +6,8 @@ ExpiresByType image/jpeg "access plus 1 month"
 ExpiresByType font/woff2 "access plus 1 year"
 ExpiresByType text/css "access plus 1 week"
 </IfModule>
+# Fichiers internes du projet : jamais servis
+RedirectMatch 404 /\.(git|claude)(/|$)
+<FilesMatch "\.md$">
+Require all denied
+</FilesMatch>
