@@ -55,3 +55,12 @@ Répondre en **français**, simplement.
   Plan d'actions RankFlow : maximum atteignable 93. Écarts assumés : « intention » jugée informationnelle
   (contenu explicatif riche, conservé : c'est lui qui différencie les pages) ; « Organization.sameAs » manquant
   tant que NuisiVox n'a pas de fiche Google ni de profils officiels (ne jamais inventer de profil).
+
+## Tarifs à utiliser dans les exemples et les FAQ (consigne du 2026-11-03)
+S'inspirer de la grille 2026 fournie par le propriétaire (tarifs indicatifs, HT) :
+- Fourmis, cafards, mouches, moucherons : traitement chimique intérieur 163 € HT le passage (extérieur sur devis).
+- Dératisation (mécanique ou rodenticide) : 150 € HT le passage, majoration sur devis dans les combles ou vides sanitaires.
+- Guêpes, frelons : nid à moins de 5 m, visible et accessible, 90 € HT ; au-delà sur devis.
+- Autres nuisibles et contrats annuels de prévention : sur devis.
+- Devis gratuit ; pas de frais de déplacement dans le 13 et le 83 ; majoration jusqu'à 50 % week-ends, fériés et nuits (19 h - 7 h).
+Toujours préciser « à titre indicatif » et « HT ». Punaises de lit : non traitées sur NuisiVox.
