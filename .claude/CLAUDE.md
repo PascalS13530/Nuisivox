@@ -49,3 +49,9 @@ Répondre en **français**, simplement.
   naturel, sans bourrage de mots-clés ni promesse invérifiable.
 - Aucun avis, note ou témoignage inventé ; aucune donnée structurée pour ce qui n'est pas visible.
 - Aucun secret dans le dépôt (le dépôt est public).
+
+## RankFlow (journal)
+- 2026-11-03 : Dératisation Marseille 93/100, Aix 93/100, Aubagne 93/100 ; GEO 10/10 (16/16 signaux) sur les trois.
+  Plan d'actions RankFlow : maximum atteignable 93. Écarts assumés : « intention » jugée informationnelle
+  (contenu explicatif riche, conservé : c'est lui qui différencie les pages) ; « Organization.sameAs » manquant
+  tant que NuisiVox n'a pas de fiche Google ni de profils officiels (ne jamais inventer de profil).
