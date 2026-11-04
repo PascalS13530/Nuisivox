@@ -1,0 +1,50 @@
+---
+// Contenu de la page /contact.html (gabarit commun : src/layouts/Base.astro)
+import Base from '../layouts/Base.astro';
+const page = {"title": "Contact : demander une dératisation ou désinsectisation (13)", "description": "Demandez une intervention de dératisation ou de désinsectisation à Marseille, Aix-en-Provence, Aubagne et dans les Bouches-du-Rhône.", "canonical": "https://nuisivox.fr/contact.html", "ogType": "website", "ogTitle": "Contact : demander une dératisation ou désinsectisation (13)", "ogDescription": "Demandez une intervention de dératisation ou de désinsectisation à Marseille, Aix-en-Provence, Aubagne et dans les Bouches-du-Rhône.", "ogUrl": "https://nuisivox.fr/contact.html", "ogImage": "https://nuisivox.fr/partage-nuisivox.jpg", "ogImageWidth": "1200", "ogImageHeight": "630", "jsonld": ["[{\"@context\": \"https://schema.org\", \"@type\": \"BreadcrumbList\", \"itemListElement\": [{\"@type\": \"ListItem\", \"position\": 1, \"name\": \"Accueil\", \"item\": \"https://nuisivox.fr/\"}, {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Contact\", \"item\": \"https://nuisivox.fr/contact.html\"}]}, {\"@context\": \"https://schema.org\", \"@type\": \"FAQPage\", \"mainEntity\": [{\"@type\": \"Question\", \"name\": \"Quelle photo envoyer avec ma demande ?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Une photo des traces ou de l'insecte, prise de près. Par exemple des crottes à côté d'une pièce de monnaie pour l'échelle, ou un nid photographié de loin, sans s'en approcher.\"}}, {\"@type\": \"Question\", \"name\": \"Quelle zone couvrez-vous ?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Marseille, le Pays d'Aix, le Pays d'Aubagne et le reste des Bouches-du-Rhône. NuisiVox est basé à Trets.\"}}, {\"@type\": \"Question\", \"name\": \"Quand pouvez-vous être joint ?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Du lundi au samedi, de 8 h à 19 h, au téléphone. En dehors de ces horaires, laissez votre demande avec le formulaire : nous vous rappelons.\"}}, {\"@type\": \"Question\", \"name\": \"Et pour les punaises de lit ?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Les punaises de lit sont traitées par notre enseigne spécialisée, Punaises Assistance.\"}}, {\"@type\": \"Question\", \"name\": \"Intervenez-vous en urgence ?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Oui. Pour une urgence, par exemple des rats dans le logement ou un nid de frelons près d'une porte, nous intervenons en général sous 24 h dans les Bouches-du-Rhône.\"}}, {\"@type\": \"Question\", \"name\": \"Le devis est-il payant ?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Non, le devis est gratuit. Le prix vous est annoncé avant de commencer.\"}}]}]", "{\"@context\": \"https://schema.org\", \"@type\": \"WebPage\", \"@id\": \"https://nuisivox.fr/contact.html#page\", \"url\": \"https://nuisivox.fr/contact.html\", \"name\": \"Contact : demander une dératisation ou désinsectisation (13)\", \"inLanguage\": \"fr-FR\", \"datePublished\": \"2026-10-18\", \"dateModified\": \"2026-10-24\", \"author\": {\"@id\": \"https://nuisivox.fr/#entreprise\"}, \"publisher\": {\"@id\": \"https://nuisivox.fr/#entreprise\"}, \"isPartOf\": {\"@type\": \"WebSite\", \"@id\": \"https://nuisivox.fr/#site\", \"name\": \"NuisiVox\", \"url\": \"https://nuisivox.fr/\"}, \"speakable\": {\"@type\": \"SpeakableSpecification\", \"cssSelector\": [\"h1\", \".lead\"]}}", "{\"@context\": \"https://schema.org\", \"@type\": [\"Organization\", \"LocalBusiness\"], \"@id\": \"https://nuisivox.fr/#entreprise\", \"name\": \"NuisiVox\", \"url\": \"https://nuisivox.fr/\", \"logo\": \"https://nuisivox.fr/logo.svg\", \"areaServed\": [\"Marseille\", \"Aix-en-Provence\", \"Aubagne\", \"Bouches-du-Rhône\"], \"address\": {\"@type\": \"PostalAddress\", \"streetAddress\": \"390 chemin de Bourdin\", \"postalCode\": \"13530\", \"addressLocality\": \"Trets\", \"addressRegion\": \"Bouches-du-Rhône\", \"addressCountry\": \"FR\"}, \"telephone\": \"+33660687819\", \"founder\": {\"@type\": \"Person\", \"name\": \"Mathias Sergent\", \"jobTitle\": \"Fondateur, applicateur titulaire du Certibiocide\"}}"]};
+---
+<Base page={page} actif="contact.html"><main><section class="hero compact"><div class="wrap">
+<div class="hero-text"><span class="breadcrumb"><a href="index.html">Accueil</a> / Contact</span><span class="eyebrow">Contact</span><h1>Demander une <em>intervention</em></h1><p class="lead">Décrivez ce que vous voyez. Une photo des traces ou des insectes aide beaucoup au diagnostic.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="contact.html">Demander une intervention</a><span class="phone">06 60 68 78 19</span></div>
+<p class="updated">Mis à jour le <time datetime="2026-10-24">24 octobre 2026</time> · par <a href="techniciens.html" rel="author">Mathias Sergent</a>, technicien certifié</p><ul class="trust"><li>Technicien certifié Certibiocide</li><li>Particuliers et professionnels</li><li>Tout le département 13</li></ul></div>
+</div></section>
+<section class="block"><div class="wrap split">
+  <form id="demande" action="contact.php" method="post">
+    <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><input id="f-site" name="site_web" tabindex="-1" autocomplete="off" aria-label="site"></div>
+    <input type="hidden" name="t" id="f-t">
+    <label for="f-nom">Nom<input id="f-nom" name="nom" autocomplete="name" required></label>
+    <label for="f-tel">Téléphone<input id="f-tel" name="tel" type="tel" autocomplete="tel" required></label>
+    <label for="f-commune">Commune<input id="f-commune" name="commune" placeholder="ex. Aubagne, Marseille 13005" required></label>
+    <label for="f-nuisible">Nuisible<select id="f-nuisible" name="nuisible">
+      <option>Rats ou souris</option><option>Cafards</option><option>Punaises de lit</option><option>Frelons ou guêpes</option>
+      <option>Moustique tigre</option><option>Chenilles processionnaires</option><option>Autre ou je ne sais pas</option></select></label>
+    <label for="f-msg">Ce que vous constatez<textarea id="f-msg" name="message" rows="5"></textarea></label>
+    <button class="btn btn-primary" type="submit">Envoyer la demande</button>
+    <p class="form-note">Vos coordonnées servent uniquement à vous rappeler pour cette demande.</p>
+    <p class="form-status" id="f-status" role="status" aria-live="polite" hidden></p>
+  </form>
+  <div class="prose"><div class="section-head"><span class="eyebrow">Par téléphone</span><h2>Appelez-nous</h2></div><p class="phone">06 60 68 78 19</p><p>Du lundi au samedi, 8 h – 19 h</p>
+  <p>Zone d'intervention&nbsp;: Marseille, Pays d'Aix, Pays d'Aubagne et Bouches-du-Rhône.</p></div>
+</div></section>
+<script is:inline>
+(function(){
+  var f=document.getElementById("demande"),st=document.getElementById("f-status"),b=f.querySelector("button[type=submit]");
+  document.getElementById("f-t").value=Date.now();
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    b.disabled=true;b.textContent="Envoi en cours…";
+    fetch(f.action,{method:"POST",body:new FormData(f)})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        st.textContent=d.message;st.hidden=false;
+        if(d.ok){b.textContent="Demande envoyée";window.location.href="merci.html";return;}
+        else{b.disabled=false;b.textContent="Envoyer la demande";}
+      })
+      .catch(function(){st.textContent="L'envoi a échoué. Merci de nous appeler au 06 60 68 78 19.";st.hidden=false;b.disabled=false;b.textContent="Envoyer la demande";});
+  });
+})();
+</script><section class="block"><div class="wrap"><div class="section-head"><span class="eyebrow">Questions fréquentes</span><h2>Votre demande&nbsp;: vos questions</h2></div><div class="faq"><details><summary>Quelle photo envoyer avec ma demande&nbsp;?</summary><p>Une photo des traces ou de l'insecte, prise de près. Par exemple des crottes à côté d'une pièce de monnaie pour l'échelle, ou un nid photographié de loin, sans s'en approcher.</p></details><details><summary>Quelle zone couvrez-vous&nbsp;?</summary><p>Marseille, le Pays d'Aix, le Pays d'Aubagne et le reste des Bouches-du-Rhône. NuisiVox est basé à Trets.</p></details><details><summary>Quand pouvez-vous être joint&nbsp;?</summary><p>Du lundi au samedi, de 8 h à 19 h, au téléphone. En dehors de ces horaires, laissez votre demande avec le formulaire&nbsp;: nous vous rappelons.</p></details><details><summary>Et pour les punaises de lit&nbsp;?</summary><p>Les punaises de lit sont traitées par notre enseigne spécialisée, Punaises Assistance.</p></details><details><summary>Intervenez-vous en urgence&nbsp;?</summary><p>Oui. Pour une urgence, par exemple des rats dans le logement ou un nid de frelons près d'une porte, nous intervenons en général sous 24 h dans les Bouches-du-Rhône.</p></details><details><summary>Le devis est-il payant&nbsp;?</summary><p>Non, le devis est gratuit. Le prix vous est annoncé avant de commencer.</p></details></div></div></section><section class="block linkhub-wrap"><div class="wrap"><div class="section-head"><span class="eyebrow">En savoir plus</span><h2>Avant de nous écrire</h2></div><ul class="linkhub"><li><a href="deratisation.html">Dératisation</a></li><li><a href="desinsectisation.html">Désinsectisation</a></li><li><a href="carnet.html">Exemples d'interventions dans le 13</a></li></ul></div></section></main><section class="cta"><div class="wrap"><div class="box">
+  <div><h2>Un nuisible chez vous&nbsp;?</h2><p>Décrivez ce que vous voyez, on vous rappelle pour fixer un diagnostic.</p></div>
+  <div class="hero-actions"><span class="phone">06 60 68 78 19</span><a class="btn btn-dark" href="contact.html">Demander une intervention</a></div>
+</div></div></section>
+</Base>

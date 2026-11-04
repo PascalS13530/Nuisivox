@@ -1,0 +1,41 @@
+# Mise en ligne de nuisivox.fr : à chaque push, le site Astro est construit et contrôlé,
+# puis le résultat (dossier dist/) est publié sur la branche « deploy », que Hostinger installe.
+name: Mise en ligne
+on:
+  push:
+    branches: [main, astro]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: mise-en-ligne
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Construction et contrôle du site
+        run: npm run check
+      - name: Publication sur la branche deploy
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$URL" deploy >/dev/null; then
+            git clone --quiet --depth 1 --branch deploy "$URL" site
+          else
+            mkdir site && git -C site init --quiet -b deploy && git -C site remote add origin "$URL"
+          fi
+          rsync -a --delete --exclude .git dist/ site/
+          cd site
+          git add -A
+          if git diff --cached --quiet; then echo "Aucun changement à publier."; exit 0; fi
+          git -c user.name="github-actions" -c user.email="github-actions@users.noreply.github.com" \
+            commit --quiet -m "Mise en ligne de ${GITHUB_SHA::7}"
+          git push --quiet origin deploy

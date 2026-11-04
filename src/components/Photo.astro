@@ -1,0 +1,23 @@
+---
+// Photo optimisée : AVIF et WebP en plusieurs tailles, le navigateur charge la plus légère adaptée à l'écran.
+// Source : src/assets/photos/<nom>.jpg. Les autres attributs (alt, width, height, loading…) sont conservés.
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.jpg', { eager: true });
+const { src, sizes: tailles, ...attrs } = Astro.props as Record<string, string>;
+const fichier = photos[`../assets/photos/${src}`];
+if (!fichier) throw new Error(`Photo introuvable : src/assets/photos/${src}`);
+const image = fichier.default;
+// Largeur affichée : grandes photos en tête de page, cartes plus petites (images chargées en différé).
+const sizes = tailles ?? (attrs.loading === 'lazy'
+  ? '(max-width: 700px) calc(100vw - 32px), 420px'
+  : '(max-width: 700px) calc(100vw - 32px), 600px');
+const largeurs = [...new Set([400, 800, image.width].filter((w) => w <= image.width))];
+const versions = async (format: 'avif' | 'webp', quality: number) =>
+  Promise.all(largeurs.map(async (w) => `${(await getImage({ src: image, width: w, format, quality })).src} ${w}w`));
+const avif = await versions('avif', 55);
+const webp = await versions('webp', 70);
+const defaut = (await getImage({ src: image, width: image.width, format: 'webp', quality: 70 })).src;
+---
+<picture><source type="image/avif" srcset={avif.join(', ')} sizes={sizes} /><source type="image/webp" srcset={webp.join(', ')} sizes={sizes} /><img src={defaut} {...attrs} /></picture>
