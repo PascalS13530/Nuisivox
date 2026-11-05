@@ -1,9 +1,10 @@
-# Mise en ligne de nuisivox.fr : à chaque push, le site Astro est construit et contrôlé,
-# puis le résultat (dossier dist/) est publié sur la branche « deploy », que Hostinger installe.
+# Mise en ligne de nuisivox.fr. Le code source du site (Astro) est sur la branche « source ».
+# À chaque push sur « source » : le site est construit et contrôlé, puis le résultat (dist/) est publié
+# sur la branche « main », que Hostinger installe automatiquement. Ne jamais modifier « main » à la main.
 name: Mise en ligne
 on:
   push:
-    branches: [main, astro]
+    branches: [source]
   workflow_dispatch:
 permissions:
   contents: write
@@ -22,20 +23,18 @@ jobs:
       - run: npm ci
       - name: Construction et contrôle du site
         run: npm run check
-      - name: Publication sur la branche deploy
+      - name: Publication sur la branche main (installée par Hostinger)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if git ls-remote --exit-code --heads "$URL" deploy >/dev/null; then
-            git clone --quiet --depth 1 --branch deploy "$URL" site
-          else
-            mkdir site && git -C site init --quiet -b deploy && git -C site remote add origin "$URL"
-          fi
+          git clone --quiet --depth 1 --branch main "$URL" site
           rsync -a --delete --exclude .git dist/ site/
+          # Consignes de travail pour les sessions Claude ouvertes sur main (jamais servies : règle dans .htaccess)
+          mkdir -p site/.claude && cp .claude/CLAUDE.md site/.claude/CLAUDE.md
           cd site
           git add -A
           if git diff --cached --quiet; then echo "Aucun changement à publier."; exit 0; fi
           git -c user.name="github-actions" -c user.email="github-actions@users.noreply.github.com" \
-            commit --quiet -m "Mise en ligne de ${GITHUB_SHA::7}"
-          git push --quiet origin deploy
+            commit --quiet -m "Mise en ligne de source@${GITHUB_SHA::7}"
+          git push --quiet origin main

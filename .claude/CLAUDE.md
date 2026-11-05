@@ -4,17 +4,21 @@ Site statique **Astro** de **NuisiVox** (migré depuis du HTML écrit à la main
 Bouches-du-Rhône (entreprise de Mathias Sergent). Propriétaire et administrateur : Pascal Sergent.
 Répondre en **français**, simplement.
 
-## Mise en ligne
-- **Par GitHub** : chaque `git push` sur `main` déclenche `.github/workflows/mise-en-ligne.yml` :
-  construction Astro + contrôle (`npm run check`), puis publication du dossier `dist/` sur la branche
-  **`deploy`**, que Hostinger installe (Hostinger doit être réglé sur la branche `deploy`, pas `main`).
-  Le propriétaire veut que chaque modification demandée soit mise en ligne (commit en français, puis push sur `main`).
+## Branches et mise en ligne (organisation du 2026-11-05)
+- **Le code source du site est sur la branche `source`.** C'est là qu'on travaille, commite et pousse.
+  Si la session s'ouvre sur `main`, faire d'abord `git fetch origin source && git checkout source`.
+- **`main` est générée automatiquement : ne jamais y commiter.** À chaque `git push` sur `source`,
+  `.github/workflows/mise-en-ligne.yml` construit le site Astro, le contrôle (`npm run check`) et publie
+  le résultat (`dist/`) sur `main`, que Hostinger installe automatiquement (connexion GitHub, branche main).
+  Si le contrôle échoue, rien n'est mis en ligne.
+- Le propriétaire veut que chaque modification demandée soit mise en ligne : commit en français sur
+  `source`, puis `git push origin source` ; vérifier ensuite la page en ligne (1 à 2 minutes).
 - Avant de pousser : `npm run check` (construit le site et vérifie liens internes, H1, title,
   description, canonical, alt des images, JSON-LD, plan du site). Mettre à jour `public/sitemap.xml`
   si une page est créée ou supprimée.
 - Après toute modification de `public/styles.css`, changer `versionCss` dans `src/layouts/Base.astro`
   (le navigateur garde la feuille de style en cache une semaine).
-- Ce dossier `.claude/` et les fichiers `.md` ne sont pas publiés (seul `dist/` l'est).
+- `.claude/` et les fichiers `.md` ne sont jamais servis par le site (règle dans `public/.htaccess`).
 
 ## Où modifier quoi
 | Je veux… | Fichier |
