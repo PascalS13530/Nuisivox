@@ -33,7 +33,7 @@
 <script>
 (function(){
   var f=document.getElementById("demande"),st=document.getElementById("f-status"),b=f.querySelector("button[type=submit]");
-  document.getElementById("f-t").value=Date.now();
+  fetch("contact.php?jeton=1",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){document.getElementById("f-t").value=d.jeton;}).catch(function(){});
   f.addEventListener("submit",function(e){
     e.preventDefault();
     b.disabled=true;b.textContent="Envoi en cours…";
