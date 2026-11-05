@@ -1,17 +1,36 @@
 # CLAUDE.md — NuisiVox
 
-Site statique en HTML (pas de générateur) de **NuisiVox** : dératisation et désinsectisation dans les
+Site statique **Astro** de **NuisiVox** (migré depuis du HTML écrit à la main le 2026-11-04, pages et adresses inchangées) : dératisation et désinsectisation dans les
 Bouches-du-Rhône (entreprise de Mathias Sergent). Propriétaire et administrateur : Pascal Sergent.
 Répondre en **français**, simplement.
 
-## Mise en ligne
-- **Par GitHub** : chaque `git push` sur `main` est mis en ligne. Le propriétaire veut que chaque
-  modification demandée soit mise en ligne (commit en français, puis push sur `main`).
-- Avant de pousser : relire le HTML modifié, vérifier les liens internes, mettre à jour `sitemap.xml`
+## Branches et mise en ligne (organisation du 2026-11-05)
+- **Le code source du site est sur la branche `source`.** C'est là qu'on travaille, commite et pousse.
+  Si la session s'ouvre sur `main`, faire d'abord `git fetch origin source && git checkout source`.
+- **`main` est générée automatiquement : ne jamais y commiter.** À chaque `git push` sur `source`,
+  `.github/workflows/mise-en-ligne.yml` construit le site Astro, le contrôle (`npm run check`) et publie
+  le résultat (`dist/`) sur `main`, que Hostinger installe automatiquement (connexion GitHub, branche main).
+  Si le contrôle échoue, rien n'est mis en ligne.
+- Le propriétaire veut que chaque modification demandée soit mise en ligne : commit en français sur
+  `source`, puis `git push origin source` ; vérifier ensuite la page en ligne (1 à 2 minutes).
+- Avant de pousser : `npm run check` (construit le site et vérifie liens internes, H1, title,
+  description, canonical, alt des images, JSON-LD, plan du site). Mettre à jour `public/sitemap.xml`
   si une page est créée ou supprimée.
-- Après toute modification de `styles.css`, changer le paramètre de version dans toutes les pages
-  (`styles.css?v=AAAAMMJJx`) : le navigateur garde la feuille de style en cache une semaine.
-- Ce dossier `.claude/` et les fichiers `.md` ne doivent pas être servis (règle dans `.htaccess`).
+- Après toute modification de `public/styles.css`, changer `versionCss` dans `src/layouts/Base.astro`
+  (le navigateur garde la feuille de style en cache une semaine).
+- `.claude/` et les fichiers `.md` ne sont jamais servis par le site (règle dans `public/.htaccess`).
+
+## Où modifier quoi
+| Je veux… | Fichier |
+|---|---|
+| Le texte d'une page | `src/pages/<page>.astro` (contenu entre `<Base …>` et `</Base>`) |
+| Title, description, image de partage, JSON-LD d'une page | objet `page` en haut de `src/pages/<page>.astro` |
+| Menu | `src/components/Header.astro` (une seule fois pour tout le site) |
+| Pied de page, crédits photos communs | `src/components/Footer.astro` (crédit propre à une page : attribut `credits` de `<Base>`) |
+| `<head>` commun, barre d'appel mobile, scripts | `src/layouts/Base.astro` |
+| Une photo | fichier JPG dans `src/assets/photos/`, puis `<Photo src="nom.jpg" alt="…" width="…" height="…" />` (AVIF/WebP en plusieurs tailles automatiquement) ; si elle sert d'image de partage, copie aussi dans `public/` |
+| Styles | `public/styles.css` |
+| Fichiers servis tels quels (.htaccess, robots.txt, sitemap.xml, llms.txt, consent.js, contact.php, polices, icônes) | `public/` |
 
 ## Positionnement (décisions du propriétaire)
 - Nuisibles principaux : **rats, souris, blattes/cafards, fourmis, guêpes, frelons**.

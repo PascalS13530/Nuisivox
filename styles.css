@@ -44,6 +44,8 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6; }
 img, svg { max-width: 100%; }
+/* Photos optimisées (src/components/Photo.astro) : <picture> sans effet sur la mise en page */
+picture { display: contents; }
 a { color: var(--sea); text-underline-offset: 3px; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: 20px; }
@@ -236,7 +238,7 @@ input, textarea, select { font: inherit; padding: 12px 14px; border: 1px solid v
 /* Photos réelles dans les cartes */
 .card .art img, .entry .art img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .credits { font-size: .75rem; opacity: .75; margin-top: 24px; max-width: none; }
-.zone > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.zone > img, .zone > picture > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-art img, .chantier .art img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* Maillage interne */
