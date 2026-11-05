@@ -5,6 +5,8 @@
 date_default_timezone_set('Europe/Paris');
 header('Content-Type: application/json; charset=utf-8');
 header('X-Robots-Tag: noindex');
+header('X-Content-Type-Options: nosniff');
+header('Cache-Control: no-store');
 
 const DESTINATAIRE = 'contact@nuisivox.fr';
 const EXPEDITEUR   = 'contact@nuisivox.fr';
@@ -12,6 +14,7 @@ const DELAI_MIN    = 4;      // secondes minimum entre l'affichage et l'envoi (l
 const DELAI_MAX    = 86400;  // formulaire valable 24 h
 const MAX_PAR_IP   = 5;      // demandes max par adresse IP...
 const FENETRE_IP   = 3600;   // ...sur une heure
+const MAX_GLOBAL   = 30;     // demandes max pour tout le site sur une heure (anti-inondation de la boîte mail)
 
 function repondre($ok, $message, $code = 200) {
     http_response_code($code);
@@ -30,14 +33,34 @@ function nettoyer($v, $max) {
     return mb_substr($v, 0, $max);
 }
 
+// Secret propre au serveur, créé au premier usage hors du dossier public (jamais dans le dépôt).
+function secret() {
+    foreach ([dirname(__DIR__), sys_get_temp_dir()] as $dossier) {
+        $f = $dossier . '/.nuisivox-formulaire-secret';
+        if (is_file($f) && strlen($s = (string)file_get_contents($f)) >= 32) return $s;
+        if (is_writable($dossier)) {
+            $s = bin2hex(random_bytes(32));
+            if (@file_put_contents($f, $s, LOCK_EX) !== false) { @chmod($f, 0600); return $s; }
+        }
+    }
+    repondre(false, "Le formulaire est indisponible. Merci de nous appeler au 06 60 68 78 19.", 500);
+}
+
+// Jeton signé par le serveur à l'ouverture de la page : l'heure d'affichage ne peut pas être falsifiée.
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['jeton'])) {
+    $t = (string)time();
+    echo json_encode(['jeton' => $t . '.' . hash_hmac('sha256', $t, secret())]);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     repondre(false, 'Méthode non autorisée.', 405);
 }
 
-// 1. Le formulaire doit venir du site lui-même
+// 1. Le formulaire doit venir du site lui-même (les navigateurs indiquent toujours l'origine)
 $origine = $_SERVER['HTTP_ORIGIN'] ?? ($_SERVER['HTTP_REFERER'] ?? '');
-if ($origine !== '' && !preg_match('#^https?://(www\.)?nuisivox\.fr(/|$)#i', $origine)) {
-    repondre(false, 'Origine non autorisée.', 403);
+if (!preg_match('#^https?://(www\.)?nuisivox\.fr(/|$)#i', $origine)) {
+    repondre(false, 'Origine non autorisée. Merci de nous appeler au 06 60 68 78 19.', 403);
 }
 
 // 2. Champ piège invisible : un humain le laisse vide, un robot le remplit
@@ -45,10 +68,17 @@ if (!empty($_POST['site_web'])) {
     bloquer_robot();
 }
 
-// 3. Délai de remplissage : trop rapide = robot
-$debut = (int)($_POST['t'] ?? 0);
-$ecoule = time() - intdiv($debut, 1000);
-if ($debut <= 0 || $ecoule < DELAI_MIN || $ecoule > DELAI_MAX) {
+// 3. Jeton signé et délai de remplissage : trop rapide = robot
+$jeton = explode('.', (string)($_POST['t'] ?? ''), 2);
+if (count($jeton) !== 2 || !ctype_digit($jeton[0])
+    || !hash_equals(hash_hmac('sha256', $jeton[0], secret()), $jeton[1])) {
+    repondre(false, 'La page a expiré : merci de la recharger, puis de renvoyer votre demande.', 400);
+}
+$ecoule = time() - (int)$jeton[0];
+if ($ecoule > DELAI_MAX) {
+    repondre(false, 'La page a expiré : merci de la recharger, puis de renvoyer votre demande.', 400);
+}
+if ($ecoule < DELAI_MIN) {
     bloquer_robot();
 }
 
@@ -64,6 +94,17 @@ if (is_file($fichier)) {
 }
 if (count($horodatages) >= MAX_PAR_IP) {
     repondre(false, 'Trop de demandes envoyées. Merci de nous appeler au 06 60 68 78 19.', 429);
+}
+$fichier_global = sys_get_temp_dir() . '/nuisivox_form_global';
+$global = [];
+if (is_file($fichier_global)) {
+    $global = array_filter(
+        array_map('intval', explode(',', (string)file_get_contents($fichier_global))),
+        fn($t) => $t > time() - FENETRE_IP
+    );
+}
+if (count($global) >= MAX_GLOBAL) {
+    repondre(false, 'Le formulaire est très sollicité. Merci de nous appeler au 06 60 68 78 19.', 429);
 }
 
 // 5. Validation des champs
@@ -127,5 +168,7 @@ if (!$envoye) {
 
 $horodatages[] = time();
 @file_put_contents($fichier, implode(',', $horodatages), LOCK_EX);
+$global[] = time();
+@file_put_contents($fichier_global, implode(',', $global), LOCK_EX);
 
 repondre(true, 'Merci, votre demande a bien été envoyée. Nous vous rappelons rapidement.');
