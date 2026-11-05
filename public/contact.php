@@ -43,7 +43,7 @@ function secret() {
             if (@file_put_contents($f, $s, LOCK_EX) !== false) { @chmod($f, 0600); return $s; }
         }
     }
-    repondre(false, "Le formulaire est indisponible. Merci de nous appeler au 06 60 68 78 19.", 500);
+    repondre(false, "Le formulaire est indisponible. Merci de nous appeler au 06 60 68 78 19 ou de nous écrire à contact@nuisivox.fr.", 500);
 }
 
 // Jeton signé par le serveur à l'ouverture de la page : l'heure d'affichage ne peut pas être falsifiée.
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // 1. Le formulaire doit venir du site lui-même (les navigateurs indiquent toujours l'origine)
 $origine = $_SERVER['HTTP_ORIGIN'] ?? ($_SERVER['HTTP_REFERER'] ?? '');
 if (!preg_match('#^https?://(www\.)?nuisivox\.fr(/|$)#i', $origine)) {
-    repondre(false, 'Origine non autorisée. Merci de nous appeler au 06 60 68 78 19.', 403);
+    repondre(false, 'Origine non autorisée. Merci de nous appeler au 06 60 68 78 19 ou de nous écrire à contact@nuisivox.fr.', 403);
 }
 
 // 2. Champ piège invisible : un humain le laisse vide, un robot le remplit
@@ -93,7 +93,7 @@ if (is_file($fichier)) {
     );
 }
 if (count($horodatages) >= MAX_PAR_IP) {
-    repondre(false, 'Trop de demandes envoyées. Merci de nous appeler au 06 60 68 78 19.', 429);
+    repondre(false, 'Trop de demandes envoyées. Merci de nous appeler au 06 60 68 78 19 ou de nous écrire à contact@nuisivox.fr.', 429);
 }
 $fichier_global = sys_get_temp_dir() . '/nuisivox_form_global';
 $global = [];
@@ -104,7 +104,7 @@ if (is_file($fichier_global)) {
     );
 }
 if (count($global) >= MAX_GLOBAL) {
-    repondre(false, 'Le formulaire est très sollicité. Merci de nous appeler au 06 60 68 78 19.', 429);
+    repondre(false, 'Le formulaire est très sollicité. Merci de nous appeler au 06 60 68 78 19 ou de nous écrire à contact@nuisivox.fr.', 429);
 }
 
 // 5. Validation des champs
@@ -163,7 +163,7 @@ $envoye = mail(
 );
 
 if (!$envoye) {
-    repondre(false, "L'envoi a échoué. Merci de nous appeler au 06 60 68 78 19.", 500);
+    repondre(false, "L'envoi a échoué. Merci de nous appeler au 06 60 68 78 19 ou de nous écrire à contact@nuisivox.fr.", 500);
 }
 
 $horodatages[] = time();
