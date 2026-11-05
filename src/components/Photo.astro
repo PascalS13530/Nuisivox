@@ -11,9 +11,9 @@ if (!fichier) throw new Error(`Photo introuvable : src/assets/photos/${src}`);
 const image = fichier.default;
 // Largeur affichée : grandes photos en tête de page, cartes plus petites (images chargées en différé).
 const sizes = tailles ?? (attrs.loading === 'lazy'
-  ? '(max-width: 700px) calc(100vw - 32px), 420px'
+  ? '(max-width: 700px) calc(100vw - 32px), 380px'
   : '(max-width: 700px) calc(100vw - 32px), 600px');
-const largeurs = [...new Set([400, 800, image.width].filter((w) => w <= image.width))];
+const largeurs = [...new Set([400, 600, 800, image.width].filter((w) => w <= image.width))];
 const versions = async (format: 'avif' | 'webp', quality: number) =>
   Promise.all(largeurs.map(async (w) => `${(await getImage({ src: image, width: w, format, quality })).src} ${w}w`));
 const avif = await versions('avif', 55);
